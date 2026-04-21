@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-function Result({ book, level, score, onRepeat, onSelectAnotherBook, onFinish }) {
+function Result({ book, level, score, hasNextLevel, onNextLevel, onRepeat, onSelectAnotherBook, onFinish }) {
   const totalScore = level.questions.length * 10;
   const percentage = (score / totalScore) * 100;
 
@@ -60,21 +60,50 @@ function Result({ book, level, score, onRepeat, onSelectAnotherBook, onFinish })
         </p>
       </div>
 
+      {hasNextLevel && (
+        <div style={{ background: 'white', borderRadius: 16, padding: 28, boxShadow: '0 10px 30px rgba(0,0,0,0.1)', maxWidth: 600, margin: '0 auto 40px', borderLeft: '4px solid #10b981', backgroundColor: '#f0fdf4' }}>
+          <p style={{ fontSize: '1.1rem', lineHeight: 1.7, color: '#047857', margin: 0, fontWeight: 600 }}>
+            ¡Felicitaciones! 🎉 Has desbloqueado el siguiente nivel. Sigue mejorando tu comprensión lectora.
+          </p>
+        </div>
+      )}
+
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16 }}>
-        <button
-          type="button"
-          onClick={onRepeat}
-          className="btn btn-primary"
-        >
-          🔄 Repetir nivel
-        </button>
-        <button
-          type="button"
-          onClick={onSelectAnotherBook}
-          className="btn btn-secondary"
-        >
-          📚 Seleccionar otro libro
-        </button>
+        {hasNextLevel ? (
+          <>
+            <button
+              type="button"
+              onClick={onNextLevel}
+              className="btn btn-primary"
+            >
+              ▶️ Siguiente nivel
+            </button>
+            <button
+              type="button"
+              onClick={onSelectAnotherBook}
+              className="btn btn-secondary"
+            >
+              📚 Volver a niveles
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              type="button"
+              onClick={onRepeat}
+              className="btn btn-primary"
+            >
+              🔄 Repetir nivel
+            </button>
+            <button
+              type="button"
+              onClick={onSelectAnotherBook}
+              className="btn btn-secondary"
+            >
+              📚 Volver a niveles
+            </button>
+          </>
+        )}
       </div>
     </section>
   );

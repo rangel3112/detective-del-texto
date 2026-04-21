@@ -94,6 +94,31 @@ function App() {
     setPage('game');
   };
 
+  const handleNextLevel = () => {
+    // Encontrar el siguiente nivel
+    if (!selectedBook) return;
+    const currentLevelIndex = selectedBook.levels.findIndex((level) => level.id === selectedLevelId);
+    if (currentLevelIndex < selectedBook.levels.length - 1) {
+      const nextLevel = selectedBook.levels[currentLevelIndex + 1];
+      setSelectedLevelId(nextLevel.id);
+      resetGameState();
+      setPage('game');
+    }
+  };
+
+  const getNextLevel = () => {
+    if (!selectedBook) return null;
+    const currentLevelIndex = selectedBook.levels.findIndex((level) => level.id === selectedLevelId);
+    if (currentLevelIndex < selectedBook.levels.length - 1) {
+      return selectedBook.levels[currentLevelIndex + 1];
+    }
+    return null;
+  };
+
+  const hasNextLevel = () => {
+    return getNextLevel() !== null;
+  };
+
   const handleFinishLevel = () => {
     // Guardar el progreso
     if (selectedBook && selectedLevel) {
@@ -135,6 +160,8 @@ function App() {
           book={selectedBook}
           level={selectedLevel}
           score={score}
+          hasNextLevel={hasNextLevel()}
+          onNextLevel={handleNextLevel}
           onRepeat={handleRepeatLevel}
           onSelectAnotherBook={handleBackToHome}
           onFinish={handleFinishLevel}

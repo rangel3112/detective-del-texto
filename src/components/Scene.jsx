@@ -22,8 +22,31 @@ function Scene({ data }) {
 
   return (
     <section style={{ marginTop: 30, marginBottom: 30 }}>
-      <div style={{ marginBottom: 16 }}>
-        <p style={{ color: '#4b5563', lineHeight: 1.7, margin: 0 }}>{data.description}</p>
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        marginBottom: 32 
+      }}>
+        <div style={{
+          background: '#ffffff',
+          border: '1px solid #e5e7eb',
+          borderRadius: '12px',
+          padding: '24px',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+          maxWidth: '600px',
+          width: '100%',
+          animation: 'fadeIn 0.6s ease-in',
+        }}>
+          <p style={{ 
+            color: '#222222', 
+            lineHeight: 1.8, 
+            margin: 0,
+            fontSize: '1rem',
+            fontWeight: 500
+          }}>
+            {data.description}
+          </p>
+        </div>
       </div>
 
       <div className="scene-container" style={{ position: 'relative' }}>

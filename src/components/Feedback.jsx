@@ -12,7 +12,7 @@ function Feedback({ correct, explanation, onNext }) {
         onClick={onNext}
         className="btn btn-primary"
       >
-        ▶️ Siguiente pregunta
+         Siguiente pregunta
       </button>
     </section>
   );
